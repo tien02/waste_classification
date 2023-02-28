@@ -5,15 +5,16 @@ import config
 from models.vit import ViT
 from models.convnext import ConvNext
 from models.resnet_dino import ResNetDINO
+from models.resnet_orgin import ResNetOrigin
 from dataset import WasteDataset
-
-
 
 def get_model():
     if config.MODEL == "vit":
         model = ViT()
     elif config.MODEL == "convnext":
         model = ConvNext()
+    elif config.MODEL == "resnet-origin":
+        model = ResNetOrigin()
     else:
         model = ResNetDINO()
     return model

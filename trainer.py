@@ -37,7 +37,7 @@ class WasteClassifier(LightningModule):
         logits = self.model(images)
         loss = self.loss_fn(logits, labels)
 
-        pred = nn.functional.softmax(logits)
+        pred = nn.functional.softmax(logits, dim=1)
         pred = torch.argmax(pred, dim=1)
 
         metrics = self.test_metrics(pred, labels)

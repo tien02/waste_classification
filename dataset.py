@@ -11,6 +11,8 @@ def get_preprocess():
         return ConvNextImageProcessor.from_pretrained(config.RESNET_DINO)
     elif config.MODEL == "convnext":
         return ConvNextImageProcessor.from_pretrained(config.CONVNEXT)
+    elif config.MODEL == "resnet-origin":
+        return ConvNextImageProcessor.from_pretrained(config.RESTNET_ORIGIN)
     else:
         return ViTImageProcessor.from_pretrained(config.VIT)    
 

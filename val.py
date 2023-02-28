@@ -1,13 +1,5 @@
 import config
-from torch.utils.data import DataLoader
-import torchvision.transforms as transforms
-
 from pytorch_lightning import Trainer, seed_everything
-
-from models.vit import ViT
-from models.resnet_dino import ResNetDINO
-from models.convnext import ConvNext
-from dataset import WasteDataset
 
 from trainer import WasteClassifier
 from utils import get_model, get_test_dataloader
