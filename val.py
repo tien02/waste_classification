@@ -3,8 +3,6 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 
 from pytorch_lightning import Trainer, seed_everything
-from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from pytorch_lightning.loggers import TensorBoardLogger
 
 from models.vit import ViT
 from models.resnet_dino import ResNetDINO
@@ -44,14 +42,8 @@ if __name__ == "__main__":
     model = get_model()
     system = WasteClassifier(model=model)
 
-    checkpoint_callback = ModelCheckpoint(dirpath= config.CHECKPOINT_DIR, monitor="val_loss",
-                                            save_top_k=3, mode="min")
-    early_stopping = EarlyStopping(monitor="val_loss", mode="min")
-
-    logger = TensorBoardLogger(save_dir=config.TENSORBOARD["DIR"], name=config.TENSORBOARD["NAME"], version=config.TENSORBOARD["VERSION"])
-
     trainer = Trainer(accelerator=config.ACCELERATOR)
 
-    trainer.fit(model=system, 
+    trainer.test(model=system, 
             ckpt_path=config.TEST_CKPT_PATH, 
             dataloaders=test_dataloader)
