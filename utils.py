@@ -2,21 +2,13 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 
 import config
-from transformers import ConvNextImageProcessor, ViTImageProcessor
 from models.vit import ViT
 from models.convnext import ConvNext
 from models.resnet_dino import ResNetDINO
 from dataset import WasteDataset
 
 
-def get_preprocess():
-    if config.MODEL == "resnet-dino":
-        return ConvNextImageProcessor.from_pretrained(config.RESNET_DINO)
-    elif config.MODEL == "convnext":
-        return ConvNextImageProcessor.from_pretrained(config.CONVNEXT)
-    else:
-        return ViTImageProcessor.from_pretrained(config.VIT)
-    
+
 def get_model():
     if config.MODEL == "vit":
         model = ViT()

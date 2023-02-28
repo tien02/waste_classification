@@ -5,8 +5,6 @@ from torch.optim import Adam, AdamW
 from torchmetrics import Accuracy, F1Score, Precision, Recall, MetricCollection
 from pytorch_lightning import LightningModule
 
-
-
 class WasteClassifier(LightningModule):
     def __init__(self, model):
         super().__init__()
@@ -28,8 +26,7 @@ class WasteClassifier(LightningModule):
         images, labels = batch
 
         logits = self.model(images)
-        pred = torch.nn.functional.log_softmax(logits, dim=1)
-        loss = self.loss_fn(pred, labels)
+        loss = self.loss_fn(logits, labels)
 
         self.log("train_loss", loss, on_epoch=True, on_step=True, prog_bar=True)
         return loss
@@ -38,9 +35,9 @@ class WasteClassifier(LightningModule):
         images, labels = batch
 
         logits = self.model(images)
-        pred = torch.nn.functional.log_softmax(logits, dim=1)
-        loss = self.loss_fn(pred, labels)
+        loss = self.loss_fn(logits, labels)
 
+        pred = nn.functional.softmax(logits)
         pred = torch.argmax(pred, dim=1)
 
         metrics = self.test_metrics(pred, labels)
@@ -51,8 +48,10 @@ class WasteClassifier(LightningModule):
         images, labels = batch
 
         logits = self.model(images)
-        pred = torch.nn.functional.log_softmax(logits, dim=1)
-        loss = self.loss_fn(pred, labels)
+        pred = nn.functional.softmax(logits, dim=1)
+        
+        loss = self.loss_fn(logits, labels)
+
         self.val_acc_fn.update(pred, labels)
         self.log("val_loss", loss, prog_bar=True)
         return loss
