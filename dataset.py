@@ -2,16 +2,8 @@ import config
 import torch
 from torchvision.datasets import ImageFolder
 from torchvision.transforms import transforms
-from transformers import ConvNextImageProcessor, ViTImageProcessor
 from termcolor import colored
-
-def get_preprocess():
-    if config.MODEL == "resnet-dino":
-        return ConvNextImageProcessor.from_pretrained(config.RESNET_DINO)
-    elif config.MODEL == "convnext":
-        return ConvNextImageProcessor.from_pretrained(config.CONVNEXT)
-    else:
-        return ViTImageProcessor.from_pretrained(config.VIT)
+from utils import get_preprocess
 
 class WasteDataset(ImageFolder):
     def __init__(self, root, transform):

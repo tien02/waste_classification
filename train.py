@@ -1,60 +1,16 @@
 import config
-from torch.utils.data import DataLoader
-import torchvision.transforms as transforms
 
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from pytorch_lightning.loggers import TensorBoardLogger
 
-from models.vit import ViT
-from models.resnet_dino import ResNetDINO
-from models.convnext import ConvNext
-from dataset import WasteDataset
-
 from trainer import WasteClassifier
-
-train_transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.RandomVerticalFlip(0.5),
-        transforms.RandomRotation(45),
-        transforms.RandomHorizontalFlip(0.5)
-    ])
-
-inference_transform = transforms.Compose([
-    transforms.ToTensor(),
-])
-
-def get_model():
-    if config.MODEL == "vit":
-        model = ViT()
-    elif config.MODEL == "convnext":
-        model = ConvNext()
-    else:
-        model = ResNetDINO()
-    return model
-
-def get_dataloader():
-    train_data = WasteDataset(config.TRAIN_PATH, transform=train_transform)
-    val_data = WasteDataset(config.VAL_PATH, transform=inference_transform)
-
-    train_dataloader = DataLoader(
-        dataset=train_data,
-        batch_size=config.BATCH_SIZE,
-        num_workers=config.NUM_WORKERS,
-        shuffle=True,
-    )
-    val_dataloader = DataLoader(
-        dataset=val_data,
-        batch_size=config.BATCH_SIZE,
-        num_workers=config.NUM_WORKERS,
-    )
-
-    return train_dataloader, val_dataloader
+from utils import get_model, get_train_val_dataloader
 
 if __name__ == "__main__":
     seed_everything(config.SEED)
 
-    train_dataloader, val_dataloader = get_dataloader()
+    train_dataloader, val_dataloader = get_train_val_dataloader()
     model = get_model()
     system = WasteClassifier(model=model)
 
