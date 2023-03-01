@@ -5,7 +5,7 @@ import config
 from models.vit import ViT
 from models.convnext import ConvNext
 from models.resnet_dino import ResNetDINO
-from models.resnet_orgin import ResNetOrigin
+from models.resnet_origin import ResNetOrigin
 from dataset import WasteDataset
 
 def get_model():

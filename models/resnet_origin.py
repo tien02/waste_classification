@@ -5,7 +5,7 @@ from transformers import ResNetModel
 
 from termcolor import colored
 
-# ResNet50 pretrained in SSL fashion (DINO)
+# ResNet50 origin from Microsoft
 class ResNetOrigin(nn.Module):
     def __init__(self,):
         super().__init__()
