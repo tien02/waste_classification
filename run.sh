@@ -1,0 +1,1 @@
+docker run -it --name myapi -p 80:80 waste-classfication-api bash

@@ -1,0 +1,1 @@
+docker build -t waste-classfication-api .
