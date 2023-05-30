@@ -7,14 +7,14 @@ CONVNEXT = "facebook/convnext-tiny-224"
 RESNET_DINO = "Ramos-Ramos/dino-resnet-50"
 RESTNET_ORIGIN = "microsoft/resnet-50"
 
-OUT_CHANNELS = 6
+OUT_CHANNELS = 8
 
 # DATALOADER
 NUM_WORKERS = 2
 
 # TRAINER
 LR = {
-    'BACKBONE': 5e-5,
+    'BACKBONE': 1e-4,
     'CLASSIFIER': 5e-4,
 } 
 ACCELERATOR = "gpu"

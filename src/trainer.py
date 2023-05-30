@@ -61,6 +61,11 @@ class WasteClassifier(LightningModule):
         self.log("val_loss", loss, prog_bar=True, on_step=True, on_epoch=True)
         return loss
 
+    def validation_epoch_end(self, outputs):
+        val_acc = self.val_acc_fn.compute()
+        self.log("val_acc", val_acc, prog_bar=True)
+        self.val_acc_fn.reset()
+
     def configure_optimizers(self):
         param_lst = [
             {"params": self.model.backbone.parameters(), "lr": config_training.LR['BACKBONE']},
