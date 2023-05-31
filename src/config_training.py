@@ -7,7 +7,7 @@ CONVNEXT = "facebook/convnext-tiny-224"
 RESNET_DINO = "Ramos-Ramos/dino-resnet-50"
 RESTNET_ORIGIN = "microsoft/resnet-50"
 
-OUT_CHANNELS = 8
+OUT_CHANNELS = 6
 
 # DATALOADER
 NUM_WORKERS = 2
