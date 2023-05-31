@@ -26,7 +26,7 @@ def predict(img_file: UploadFile = File(..., description="Image file")):
             'metal': 2, 
             'paper': 3, 
             'plastic': 4, 
-            'trash': 5
+            'plastic_bag': 5
         }
     '''
     img = helper.read_image(img_file.file)

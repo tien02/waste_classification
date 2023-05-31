@@ -6,7 +6,7 @@ import onnxruntime as rt
 from transformers import AutoImageProcessor
 
 PRETRAINED_MODEL = "facebook/convnext-tiny-224"
-DRIVE_PATH = "https://drive.google.com/file/d/1lQxIyuvbh2hBnR6ow4zVf-wH6SA6sipA/view?usp=sharing"
+DRIVE_PATH = "https://drive.google.com/file/d/1Sa_g3PQBYCsfsrHK1WaKYdlEEwo85TMa/view?usp=sharing"
 
 class_idx = {
     'cardboard': 0, 
@@ -14,7 +14,7 @@ class_idx = {
     'metal': 2, 
     'paper': 3, 
     'plastic': 4, 
-    'trash': 5
+    'plastic_bag': 5
     }
 
 idx_class = {v:k for k, v in class_idx.items()}
